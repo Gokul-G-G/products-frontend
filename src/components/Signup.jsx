@@ -33,7 +33,10 @@ const Signup = () => {
         }
         
         try {
-            const response = await axios.post("http://localhost:3000/user", data);
+            const response = await axios.post(
+              "https://products-backend-slgn.onrender.com/user",
+              data
+            );
             console.log(response.data)
             alert(response.data.message);
             navigate('/login')

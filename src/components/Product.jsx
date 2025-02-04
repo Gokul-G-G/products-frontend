@@ -20,11 +20,14 @@ const Product = ({ onAddToCart }) => {
       }
 
       try {
-        const response = await axios.get("http://localhost:3000/products", {
-          headers: {
-            Authorization: `Bearer ${token}`,
-          },
-        });
+        const response = await axios.get(
+          "https://products-backend-slgn.onrender.com/products",
+          {
+            headers: {
+              Authorization: `Bearer ${token}`,
+            },
+          }
+        );
         setProducts(response.data);
         setLoading(false);
       } catch (err) {
