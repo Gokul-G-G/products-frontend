@@ -1,0 +1,31 @@
+
+/* h1{
+    padding-top: 250px;
+    padding-left: 90px;
+} */
+@media screen and (max-width: 800px){
+    h1{
+        max-width: 300px;
+    }
+}
+
+/* Home.css */
+@keyframes floatFromTop {
+  0% {
+    transform: translateY(-200px); /* Start from above the screen */
+    opacity: 0; /* Start with opacity 0 (invisible) */
+  }
+  50% {
+    transform: translateY(30px); /* Move a bit down */
+    opacity: 1; /* Fade in */
+  }
+  100% {
+    transform: translateY(0); /* Final position */
+    opacity: 1; /* Fully visible */
+  }
+}
+
+.banner h1 span {
+  display: inline-block; /* Make the span inline-block for applying transform */
+  animation: floatFromTop 1s ease-out; /* Apply the animation */
+}

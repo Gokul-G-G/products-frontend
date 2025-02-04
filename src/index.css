@@ -1,0 +1,23 @@
+*{
+    padding: 0;
+    margin: 0;
+}
+
+.product-list{
+    /* width: 90vw; */
+    margin: 0 auto;
+    padding: 20px 0;
+    display: grid;
+    grid-template-columns: repeat(auto-fit,minmax(300px,1fr));
+    gap: 20px;
+}
+.img{
+    margin: 0 auto;
+}
+.banner{
+    height: 92vh;
+    background-image: url('../src/assets/images/shopping-bag-cart.jpg');
+    background-size:cover;
+    background-repeat: no-repeat;
+    background-position: top,left;
+}
