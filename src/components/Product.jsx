@@ -14,16 +14,16 @@ const Product = ({ onAddToCart }) => {
 
   useEffect(() => {
     const fetchProducts = async () => {
-      // if (!token) {
-      //   navigate("/login");
-      //   return;
-      // }
+      if (!token) {
+        navigate("/login");
+        return;
+      }
 
       try {
         const response = await axios.get("https://products-backend-slgn.onrender.com/products", {
-          // headers: {
-          //   Authorization: `Bearer ${token}`,
-          // },
+          headers: {
+            Authorization: `Bearer ${token}`,
+          },
         });
         setProducts(response.data);
         setLoading(false);
@@ -34,8 +34,7 @@ const Product = ({ onAddToCart }) => {
     };
 
     fetchProducts();
-  },[]);
-  // }, [token, navigate] );
+  }, [token, navigate]);
 
   if (loading) return <div>Loading...</div>;
   if (error) return <div>{error}</div>;
