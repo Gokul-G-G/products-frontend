@@ -20,18 +20,28 @@ const App = () => {
   };
   const handleLogout = () => {
     setIsAuthenticated(false);
-    
+    setCart([]);
   };
 
   const handleAddToCart = (product) => {
-    setCart((prevCart) => [...prevCart, product]);
+    setCart((prevCart) => {
+      const existingProduct = prevCart.find((item) => item.id === product.id);
+      if (existingProduct) {
+        return prevCart.map((item) =>
+          item.id === product.id
+            ? { ...item, quantity: item.quantity + 1 }
+            : item
+        );
+      }
+      return [...prevCart, { ...product, quantity: 1 }];
+    });
     alert(`${product.name} has been added to your cart!`);
   };
-const handleRemoveFromCart = (id) => {
-  setCart(cart.filter((item) => item.id !== id));
-};
 
-<Cart cart={cart} onRemoveFromCart={handleRemoveFromCart} />;
+  // Handle removing products from cart
+  const handleRemoveFromCart = (id) => {
+    setCart(cart.filter((item) => item.id !== id));
+  };
 
   return (
     <div>
@@ -50,28 +60,28 @@ const handleRemoveFromCart = (id) => {
                   Products
                 </Link>
               </li>
-              </ul>
-              <ul className="navbar-nav ms-auto">
-                <li>
-                  {!isAuthenticated ? (
-                    <Link className="nav-link" to="/login">
-                      Login
-                    </Link>
-                  ) : (
-                    <button className="nav-link" onClick={handleLogout}>
-                      Logout
-                    </button>
-                  )}
-                </li>
-                {/* Conditionally render Cart Button */}
-                {isAuthenticated && (
-                  <li className="nav-item justify-content-end">
-                    <Link className="nav-link" to="/cart">
-                      Cart
-                    </Link>
-                  </li>
+            </ul>
+            <ul className="navbar-nav ms-auto">
+              <li>
+                {!isAuthenticated ? (
+                  <Link className="nav-link" to="/login">
+                    Login
+                  </Link>
+                ) : (
+                  <button className="nav-link" onClick={handleLogout}>
+                    Logout
+                  </button>
                 )}
-              </ul>
+              </li>
+              {/* Conditionally render Cart Button */}
+              {isAuthenticated && (
+                <li className="nav-item justify-content-end">
+                  <Link className="nav-link" to="/cart">
+                    Cart
+                  </Link>
+                </li>
+              )}
+            </ul>
           </div>
         </nav>
 
@@ -88,7 +98,14 @@ const handleRemoveFromCart = (id) => {
             }
           />
           <Route path="/user" element={<Signup />} />
-          <Route path="/cart" element={<Cart cart={cart} />} />
+          <Route
+            path="/cart"
+            element={
+              <ProtectedRoute isAuthenticated={isAuthenticated}>
+                <Cart cart={cart} onRemoveFromCart={handleRemoveFromCart} />
+              </ProtectedRoute>
+            }
+          />
         </Routes>
       </Router>
     </div>
