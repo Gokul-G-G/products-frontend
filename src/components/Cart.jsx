@@ -20,6 +20,7 @@ const Cart = ({ cart, onRemoveFromCart, onUpdateQuantity }) => {
                 <ListGroup.Item key={item.id} className="p-3">
                   <Row className="align-items-center">
                     {/* Product Image */}
+                {console.log(cart)}
                     <Col xs={3} md={2}>
                       <img
                         src={item.url}
@@ -28,7 +29,6 @@ const Cart = ({ cart, onRemoveFromCart, onUpdateQuantity }) => {
                         style={{ maxHeight: "80px", objectFit: "contain" }}
                       />
                     </Col>
-
                     {/* Product Details */}
                     <Col xs={6} md={6}>
                       <h5 className="mb-1">{item.name}</h5>
@@ -60,7 +60,6 @@ const Cart = ({ cart, onRemoveFromCart, onUpdateQuantity }) => {
                         Subtotal: ₹{(item.price * item.quantity).toFixed(2)}
                       </p>
                     </Col>
-
                     {/* Remove Button */}
                     <Col xs={3} md={4} className="text-end">
                       <Button
