@@ -41,11 +41,11 @@ const Product = ({ onAddToCart }) => {
 
   return (
     <div className="product-list">
-      {products.map((product,key) => (
+      {products.map((product, key) => (
         <Card key={key} style={{ margin: "10px" }}>
           <Card.Img
             variant="top"
-            style={{ height: "300px", width: "100%" }}
+            style={{ height: "300px", width: "100%", objectFit: "cover" }}
             src={product.url}
           />
           <Card.Body>
