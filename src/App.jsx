@@ -13,6 +13,7 @@ import Product from "./components/Product";
 import Cart from "./components/Cart";
 import { useEffect } from "react";
 
+const [successMessage, setSuccessMessage] = useState("");
 const App = () => {
   const [isAuthenticated, setIsAuthenticated] = useState(false);
   const [cart, setCart] = useState([]);
@@ -48,7 +49,7 @@ const App = () => {
       const existingProductIndex = updatedCart.findIndex(
         (item) => item._id === product._id
       );
-
+      console.log("existing product",existingProductIndex)
       if (existingProductIndex !== -1) {
         // If product exists, increment quantity
         updatedCart[existingProductIndex] = {
@@ -66,7 +67,8 @@ const App = () => {
       return updatedCart;
     });
 
-    alert(`${product.name} has been added to your cart!`);
+    setSuccessMessage(`${product.name} added to cart!`);
+    setTimeout(() => setSuccessMessage(""), 3000);
   };
 
   // Handle removing products from cart
@@ -156,6 +158,22 @@ const App = () => {
           />
         </Routes>
       </Router>
+      {successMessage && (
+        <div
+          style={{
+            position: "fixed",
+            top: "10px",
+            right: "10px",
+            backgroundColor: "#28a745",
+            color: "white",
+            padding: "10px 20px",
+            borderRadius: "5px",
+            fontWeight: "bold",
+            zIndex: 1000,
+          }}>
+          {successMessage}
+        </div>
+      )}
     </div>
   );
   function ProtectedRoute({ isAuthenticated, children }) {
