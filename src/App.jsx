@@ -41,18 +41,34 @@ const App = () => {
   // Handle Adding to Cart
   const handleAddToCart = (product) => {
     setCart((prevCart) => {
-      const existingProduct = prevCart.find((item) => item.id === product.id);
-      if (existingProduct) {
-        return prevCart.map((item) =>
-          item.id === product.id
-            ? { ...item, quantity: item.quantity + 1 }
-            : item
-        );
+      // Clone previous cart to avoid mutating state directly
+      let updatedCart = [...prevCart];
+
+      // Check if product already exists in cart
+      const existingProductIndex = updatedCart.findIndex(
+        (item) => item.id === product.id
+      );
+
+      if (existingProductIndex !== -1) {
+        // If product exists, increment quantity
+        updatedCart[existingProductIndex] = {
+          ...updatedCart[existingProductIndex],
+          quantity: updatedCart[existingProductIndex].quantity + 1,
+        };
+      } else {
+        // If product is new, add it to cart with quantity 1
+        updatedCart.push({ ...product, quantity: 1 });
       }
-      return [...prevCart, { ...product, quantity: 1 }];
+
+      // Save updated cart in localStorage
+      localStorage.setItem("cart", JSON.stringify(updatedCart));
+
+      return updatedCart;
     });
+
     alert(`${product.name} has been added to your cart!`);
   };
+
 
   // Handle removing products from cart
   const handleRemoveFromCart = (id) => {
