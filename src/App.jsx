@@ -76,23 +76,16 @@ const App = () => {
   // Handle updating product quantity
   const handleUpdateQuantity = (id, newQuantity) => {
     setCart((prevCart) => {
-      return prevCart.map((item) =>
+      const updatedCart = prevCart.map((item) =>
         item.id === id ? { ...item, quantity: Math.max(newQuantity, 1) } : item
       );
-    });
 
-    // Save updated cart in localStorage
-    localStorage.setItem(
-      "cart",
-      JSON.stringify(
-        cart.map((item) =>
-          item.id === id
-            ? { ...item, quantity: Math.max(newQuantity, 1) }
-            : item
-        )
-      )
-    );
+      // Save updated cart in localStorage
+      localStorage.setItem("cart", JSON.stringify(updatedCart));
+      return updatedCart;
+    });
   };
+
 
   return (
     <div>
