@@ -13,7 +13,6 @@ import Product from "./components/Product";
 import Cart from "./components/Cart";
 import { useEffect } from "react";
 
-
 const App = () => {
   const [isAuthenticated, setIsAuthenticated] = useState(false);
   const [cart, setCart] = useState([]);
@@ -50,7 +49,7 @@ const App = () => {
       const existingProductIndex = updatedCart.findIndex(
         (item) => item._id === product._id
       );
-      console.log("existing product",existingProductIndex)
+      console.log("existing product", existingProductIndex);
       if (existingProductIndex !== -1) {
         // If product exists, increment quantity
         updatedCart[existingProductIndex] = {
@@ -69,7 +68,7 @@ const App = () => {
     });
 
     setSuccessMessage(`${product.name} added to cart!`);
-    setTimeout(() => setSuccessMessage(""), 3000);
+    setTimeout(() => setSuccessMessage(""), 1000);
   };
 
   // Handle removing products from cart
@@ -80,7 +79,9 @@ const App = () => {
   const handleUpdateQuantity = (_id, newQuantity) => {
     setCart((prevCart) => {
       const updatedCart = prevCart.map((item) =>
-        item._id === _id ? { ...item, quantity: Math.max(newQuantity, 1) } : item
+        item._id === _id
+          ? { ...item, quantity: Math.max(newQuantity, 1) }
+          : item
       );
 
       // Save updated cart in localStorage
@@ -88,7 +89,6 @@ const App = () => {
       return updatedCart;
     });
   };
-
 
   return (
     <div>
@@ -164,7 +164,7 @@ const App = () => {
           style={{
             position: "fixed",
             top: "10px",
-            right: "10px",
+            right: "50px",
             backgroundColor: "#28a745",
             color: "white",
             padding: "10px 20px",
