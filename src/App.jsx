@@ -164,12 +164,14 @@ const App = () => {
           style={{
             position: "fixed",
             top: "10px",
-            right: "50px",
+            left: "50%",
+            transform: "translateX(-50%)",
             backgroundColor: "#28a745",
             color: "white",
             padding: "10px 20px",
             borderRadius: "5px",
             fontWeight: "bold",
+            textAlign:"center",
             zIndex: 1000,
           }}>
           {successMessage}
