@@ -46,7 +46,7 @@ const App = () => {
 
       // Check if product already exists in cart
       const existingProductIndex = updatedCart.findIndex(
-        (item) => item.id === product.id
+        (item) => item._id === product._id
       );
 
       if (existingProductIndex !== -1) {
@@ -70,14 +70,14 @@ const App = () => {
   };
 
   // Handle removing products from cart
-  const handleRemoveFromCart = (id) => {
-    setCart(cart.filter((item) => item.id !== id));
+  const handleRemoveFromCart = (_id) => {
+    setCart(cart.filter((item) => item._id !== _id));
   };
   // Handle updating product quantity
-  const handleUpdateQuantity = (id, newQuantity) => {
+  const handleUpdateQuantity = (_id, newQuantity) => {
     setCart((prevCart) => {
       const updatedCart = prevCart.map((item) =>
-        item.id === id ? { ...item, quantity: Math.max(newQuantity, 1) } : item
+        item._id === _id ? { ...item, quantity: Math.max(newQuantity, 1) } : item
       );
 
       // Save updated cart in localStorage

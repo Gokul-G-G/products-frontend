@@ -17,7 +17,7 @@ const Cart = ({ cart, onRemoveFromCart, onUpdateQuantity }) => {
           <Card className="p-3 shadow-sm">
             <ListGroup variant="flush">
               {cart.map((item) => (
-                <ListGroup.Item key={item.id} className="p-3">
+                <ListGroup.Item key={item._id} className="p-3">
                   <Row className="align-items-center">
                     {/* Product Image */}
                 {console.log(cart)}
@@ -40,7 +40,7 @@ const Cart = ({ cart, onRemoveFromCart, onUpdateQuantity }) => {
                           variant="outline-secondary"
                           size="sm"
                           onClick={() =>
-                            onUpdateQuantity(item.id, item.quantity - 1)
+                            onUpdateQuantity(item._id, item.quantity - 1)
                           }
                           disabled={item.quantity === 1}>
                           ➖
@@ -50,7 +50,7 @@ const Cart = ({ cart, onRemoveFromCart, onUpdateQuantity }) => {
                           variant="outline-secondary"
                           size="sm"
                           onClick={() =>
-                            onUpdateQuantity(item.id, item.quantity + 1)
+                            onUpdateQuantity(item._id, item.quantity + 1)
                           }>
                           ➕
                         </Button>
@@ -65,7 +65,7 @@ const Cart = ({ cart, onRemoveFromCart, onUpdateQuantity }) => {
                       <Button
                         variant="danger"
                         size="sm"
-                        onClick={() => onRemoveFromCart(item.id)}>
+                        onClick={() => onRemoveFromCart(item._id)}>
                         ❌ Remove
                       </Button>
                     </Col>
