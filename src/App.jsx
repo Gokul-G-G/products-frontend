@@ -69,10 +69,29 @@ const App = () => {
     alert(`${product.name} has been added to your cart!`);
   };
 
-
   // Handle removing products from cart
   const handleRemoveFromCart = (id) => {
     setCart(cart.filter((item) => item.id !== id));
+  };
+  // Handle updating product quantity
+  const handleUpdateQuantity = (id, newQuantity) => {
+    setCart((prevCart) => {
+      return prevCart.map((item) =>
+        item.id === id ? { ...item, quantity: Math.max(newQuantity, 1) } : item
+      );
+    });
+
+    // Save updated cart in localStorage
+    localStorage.setItem(
+      "cart",
+      JSON.stringify(
+        cart.map((item) =>
+          item.id === id
+            ? { ...item, quantity: Math.max(newQuantity, 1) }
+            : item
+        )
+      )
+    );
   };
 
   return (
@@ -134,7 +153,11 @@ const App = () => {
             path="/cart"
             element={
               <ProtectedRoute isAuthenticated={isAuthenticated}>
-                <Cart cart={cart} onRemoveFromCart={handleRemoveFromCart} />
+                <Cart
+                  cart={cart}
+                  onRemoveFromCart={handleRemoveFromCart}
+                  onUpdateQuantity={handleUpdateQuantity}
+                />
               </ProtectedRoute>
             }
           />
