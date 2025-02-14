@@ -21,3 +21,14 @@
     background-repeat: no-repeat;
     background-position: top,left;
 }
+
+.cart-item-img {
+  width: 80px;
+  height: 80px;
+  object-fit: contain;
+  margin-right: 15px;
+}
+
+.cart-item-details {
+  flex-grow: 1;
+}
