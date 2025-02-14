@@ -13,10 +13,11 @@ import Product from "./components/Product";
 import Cart from "./components/Cart";
 import { useEffect } from "react";
 
-const [successMessage, setSuccessMessage] = useState("");
+
 const App = () => {
   const [isAuthenticated, setIsAuthenticated] = useState(false);
   const [cart, setCart] = useState([]);
+  const [successMessage, setSuccessMessage] = useState("");
 
   // Load Cart from Local Storage
   useEffect(() => {
