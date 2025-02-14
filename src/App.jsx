@@ -11,18 +11,34 @@ import {
 import Home from "./components/Home";
 import Product from "./components/Product";
 import Cart from "./components/Cart";
+import { useEffect } from "react";
 
 const App = () => {
   const [isAuthenticated, setIsAuthenticated] = useState(false);
   const [cart, setCart] = useState([]);
+
+  // Load Cart from Local Storage
+  useEffect(() => {
+    const storedCart = JSON.parse(localStorage.getItem("cart")) || [];
+    setCart(storedCart);
+  }, []);
+
+  // Save Cart to Local Storage whenever it changes
+  useEffect(() => {
+    localStorage.setItem("cart", JSON.stringify(cart));
+  }, [cart]);
+
+  // Handle Login
   const handleLogin = () => {
     setIsAuthenticated(true);
   };
   const handleLogout = () => {
     setIsAuthenticated(false);
     setCart([]);
+    localStorage.removeItem("cart");
   };
 
+  // Handle Adding to Cart
   const handleAddToCart = (product) => {
     setCart((prevCart) => {
       const existingProduct = prevCart.find((item) => item.id === product.id);

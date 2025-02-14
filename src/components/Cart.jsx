@@ -2,7 +2,7 @@ import React from "react";
 import { Card, Button, ListGroup, Row, Col } from "react-bootstrap";
 import { Link } from "react-router-dom";
 
-const Cart = ({ cart, onRemoveFromCart }) => {
+const Cart = ({ cart, onRemoveFromCart, onUpdateQuantity }) => {
   // Calculate total price
   const totalPrice = cart.reduce(
     (sum, item) => sum + item.price * item.quantity,
@@ -33,8 +33,30 @@ const Cart = ({ cart, onRemoveFromCart }) => {
                     <Col xs={6} md={6}>
                       <h5 className="mb-1">{item.name}</h5>
                       <p className="text-muted mb-1">Price: ₹{item.price}</p>
-                      <p className="mb-1">Quantity: {item.quantity}</p>
-                      <p className="text-success fw-bold">
+
+                      {/* Quantity Controls */}
+                      <div className="d-flex align-items-center">
+                        <Button
+                          variant="outline-secondary"
+                          size="sm"
+                          onClick={() =>
+                            onUpdateQuantity(item.id, item.quantity - 1)
+                          }
+                          disabled={item.quantity === 1}>
+                          ➖
+                        </Button>
+                        <span className="mx-2">{item.quantity}</span>
+                        <Button
+                          variant="outline-secondary"
+                          size="sm"
+                          onClick={() =>
+                            onUpdateQuantity(item.id, item.quantity + 1)
+                          }>
+                          ➕
+                        </Button>
+                      </div>
+
+                      <p className="text-success fw-bold mt-2">
                         Subtotal: ₹{(item.price * item.quantity).toFixed(2)}
                       </p>
                     </Col>
