@@ -45,7 +45,7 @@ const Product = ({ onAddToCart }) => {
         <Card key={key} style={{ margin: "10px" }}>
           <Card.Img
             variant="top"
-            style={{ height: "250px", width: "100%", objectFit: "cover",padding:"10px" }}
+            style={{ height: "250px", width: "100%", objectFit: "contain",padding:"10px" }}
             src={product.url}
           />
           <Card.Body>
