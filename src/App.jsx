@@ -27,6 +27,11 @@ const App = () => {
     setCart((prevCart) => [...prevCart, product]);
     alert(`${product.name} has been added to your cart!`);
   };
+const handleRemoveFromCart = (id) => {
+  setCart(cart.filter((item) => item.id !== id));
+};
+
+<Cart cart={cart} onRemoveFromCart={handleRemoveFromCart} />;
 
   return (
     <div>
