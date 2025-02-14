@@ -46,9 +46,12 @@ const Signup = () => {
         }
 
     }
+     const handlelogin = () => {
+       navigate("/login");
+     };
 
   return (
-    <div className='banner'>
+    <div className="banner">
       <Container className="d-flex justify-content-center align-items-center min-vh-100">
         <Row>
           <Col>
@@ -98,6 +101,10 @@ const Signup = () => {
                     Sign Up
                   </Button>
                 </Form>
+                <p className="mt-3">Already have an account?</p>
+                <button className="btn btn-primary" onClick={handlelogin}>
+                  Log In Here
+                </button>
               </Card.Body>
             </Card>
           </Col>
